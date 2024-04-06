@@ -1,4 +1,5 @@
 from flask import Flask
+from speech_converter import *
 api_key= ""
 from openai import OpenAI
 
@@ -25,6 +26,16 @@ def home():
     max_tokens=300,
     )
     return response
+
+def text_match(response, transcription):
+    arr = response.choices
+    resp = client.chat.completions.create(
+    model="gpt-3.5-turbo-0125",
+    response_format={ "type": "json_object" },
+    messages=[
+        {"role": "user", "content": "Who won the world series in 2020?"}
+    ]
+)
 if __name__ =='__main__':
     app.run(debug=True)
 
