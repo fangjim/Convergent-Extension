@@ -33,7 +33,7 @@ def text_match(response, transcription):
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
-        {"role": "user", "content": "Who won the world series in 2020?"}
+        {"role": "user", "content": "Which variable in the array [response.choices] best resembles the description of [transcription]?"}
     ]
 )
 if __name__ =='__main__':
