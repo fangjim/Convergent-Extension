@@ -38,5 +38,12 @@ def text_match(response, transcription):
 )
 if __name__ =='__main__':
     app.run(debug=True)
+response = client.embeddings.create(
+    input="Your text string goes here",
+    model="text-embedding-3-small"
+)
+
+return response
+
 
 
