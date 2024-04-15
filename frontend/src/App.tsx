@@ -2,6 +2,7 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import Toolbar from './Toolbar';
+import HomePage from './HomeComponents/HomePage';
 import './App.css'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           Click me!
         </button>
       </div>
+      <HomePage />
     </>
   )
 }
