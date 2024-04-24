@@ -1,23 +1,28 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from speech_converter import *
-api_key= ""
 from openai import OpenAI
+import os
 
-client = OpenAI(api_key=api_key)
+client = OpenAI()
 app = Flask(__name__)
-@app.route('/')
+
+image_description_arr = ["green tree", "blue tree"]
+
+@app.route('/', methods=['POST'])
 def home():
+    data = request.json
+    url = data['url']
     response = client.chat.completions.create(
     model="gpt-4-vision-preview",
     messages=[
         {
         "role": "user",
         "content": [
-            {"type": "text", "text": "What’s in this image?"},
+            {"type": "text", "text": "Write a description for this image in less than 100 characters"},
             {
             "type": "image_url",
             "image_url": {
-                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
+                "url": url
             },
             },
         ],
@@ -25,25 +30,42 @@ def home():
     ],
     max_tokens=300,
     )
-    return response
+    print(response.choices[0])
+    image_description_arr.append(response.choices[0])
+    return response.choices[0].message.content.strip()
 
-def text_match(response, transcription):
-    arr = response.choices
+#get an array of all the responses
+
+def text_match(transcription):
+    
+    image_descriptions = "Given "
+    for i in range(0, len(image_description_arr)):
+
+        image_descriptions = image_descriptions + "description:"
+        image_descriptions += image_description_arr[i]
+        if i != 0:
+            image_descriptions += ","
+    image_descriptions += "give me the description most similar to "+transcription
     resp = client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
-        {"role": "user", "content": "Who won the world series in 2020?"}
+        {"role": "user", "content": image_descriptions}
     ]
-)
+    
+    )
+    return resp.choices[0]
 if __name__ =='__main__':
     app.run(debug=True)
-response = client.embeddings.create(
-    input="Your text string goes here",
-    model="text-embedding-3-small"
-)
+    
 
-return response
+print(text_match("green tree"))
+# response = client.embeddings.create(
+#     input="Your text string goes here",
+#     model="text-embedding-3-small"
+# )
+
+# return response
 
 
 
