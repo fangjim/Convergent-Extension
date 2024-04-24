@@ -1,18 +1,18 @@
 // src/HomeComponents/HomePage.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ControlPanel from './ControlPanel';
 import useSpeechSynthesis from '../hooks/useSpeechSynthesis';
-import { fetchAndReadText } from '../utils/chromeUtils';
 
 const HomePage: React.FC = () => {
     const { speak, pause, stop } = useSpeechSynthesis();
+    const [description, setDescription] = useState(''); //state to hold the fetched descrption
 
     useEffect(() => {
-        const messageHandler = (message: any, _sender: chrome.runtime.MessageSender, sendResponse: (response?: any) => void) => {
-            if (message.action === 'sendText') {
+        const messageHandler = (message: any) => {
+            if (message.action === 'speakText') {
                 speak(message.text);
+                setDescription(message.text);
             }
-            sendResponse();
         };
 
         chrome.runtime.onMessage.addListener(messageHandler);
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
     return (
         <div>
             <h1>Screen Reader</h1>
-            <ControlPanel onStart={() => fetchAndReadText()} onPause={pause} onStop={stop} />
+            <ControlPanel onStart={() => speak(description)} onPause={pause} onStop={stop} />
         </div>
     );
 };

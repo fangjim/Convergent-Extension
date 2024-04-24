@@ -1,14 +1,10 @@
-// Function to extract text from the current webpage
-const extractTextContent = () => {
-  let text = '';
-  // You can modify the selector to better suit the content you want to read
-  const elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li');
-  elements.forEach((element) => {
-      text += element.textContent + ' ';
-  });
-  return text.trim();
+// contentScript.ts
+const getImageUrls = () => {
+  const images = document.querySelectorAll('img');
+  const urls = Array.from(images).map(img => img.src);
+  console.log("Extracted image URLs: ", urls);
+  return urls;
 };
 
-// Send the extracted text to the background script
-chrome.runtime.sendMessage({ action: "sendText", text: extractTextContent() });
-
+// Send image URLs to the background script
+chrome.runtime.sendMessage({ action: "processImages", urls: getImageUrls() });

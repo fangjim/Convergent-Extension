@@ -15,3 +15,9 @@ export const fetchAndReadText = () => {
     }
   });
 };
+
+export const speakMessage = (message: string) => {
+  const utterance = new SpeechSynthesisUtterance(message);
+  window.speechSynthesis.speak(utterance);
+
+}
