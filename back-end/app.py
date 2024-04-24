@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
 from speech_converter import *
 from openai import OpenAI
+import os
 
-# api_key= "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"
 client = OpenAI()
 app = Flask(__name__)
-image_description_arr = []
+
+image_description_arr = ["green tree", "blue tree"]
 
 @app.route('/', methods=['POST'])
 def home():
@@ -17,11 +18,11 @@ def home():
         {
         "role": "user",
         "content": [
-            {"type": "text", "text": "Write a short description for this image in less than 50 characters"},
+            {"type": "text", "text": "Write a description for this image in less than 100 characters"},
             {
             "type": "image_url",
             "image_url": {
-                "url": url,
+                "url": url
             },
             },
         ],
@@ -29,7 +30,7 @@ def home():
     ],
     max_tokens=300,
     )
-    #print(response.choices[0])
+    print(response.choices[0])
     image_description_arr.append(response.choices[0])
     return response.choices[0].message.content.strip()
 
@@ -51,10 +52,14 @@ def text_match(transcription):
     messages=[
         {"role": "user", "content": image_descriptions}
     ]
-)
+    
+    )
+    return resp.choices[0]
 if __name__ =='__main__':
     app.run(debug=True)
     
+
+print(text_match("green tree"))
 # response = client.embeddings.create(
 #     input="Your text string goes here",
 #     model="text-embedding-3-small"
