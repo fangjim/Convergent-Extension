@@ -4,7 +4,7 @@ import ControlPanel from './ControlPanel';
 import useSpeechSynthesis from '../hooks/useSpeechSynthesis';
 
 const HomePage: React.FC = () => {
-    const { speak, pause, stop } = useSpeechSynthesis();
+    const { speak } = useSpeechSynthesis();
     const [description, setDescription] = useState(''); //state to hold the fetched descrption
 
     useEffect(() => {
@@ -21,8 +21,8 @@ const HomePage: React.FC = () => {
 
     return (
         <div>
-            <h1>Screen Reader</h1>
-            <ControlPanel onStart={() => speak(description)} onPause={pause} onStop={stop} />
+            <h2>Screen Reader</h2>
+            <ControlPanel onRead={() => speak(description)} />
         </div>
     );
 };
