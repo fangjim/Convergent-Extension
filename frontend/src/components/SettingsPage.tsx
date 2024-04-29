@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Radio, RadioGroup, FormControlLabel, Slider, Button } from '@mui/material';
-
+// import { Radio, RadioGroup, FormControlLabel, Slider, Button } from '@mui/material';
+import { Radio, RadioGroup, FormControlLabel, Slider } from '@mui/material';
 enum TextSize {
   Concise = 'concise',
   Detailed = 'detailed',
@@ -41,8 +41,8 @@ const volume = 50; // Declare and assign a value to the 'volume' variable
       </div>
 
       <div>
-        <Button variant="contained" color="primary">Save</Button>
-        <Button variant="contained" color="secondary">Cancel</Button>
+        {/* <Button variant="contained" color="primary">Save</Button>
+        <Button variant="contained" color="secondary">Cancel</Button> */}
       </div>
     </div>
   );

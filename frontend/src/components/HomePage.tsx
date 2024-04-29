@@ -21,7 +21,9 @@ const HomePage: React.FC = () => {
 
     return (
         <div>
-            <h2>Parrot</h2>
+            <h2>
+                Parrot <img src={'/icons/Frame13.png'} alt="Logo" style={{ width: '30px', marginLeft: '5px' }} />
+            </h2>
             <ControlPanel onRead={() => speak(description)} />
         </div>
     );
