@@ -30,12 +30,13 @@ const volume = 50; // Declare and assign a value to the 'volume' variable
 
 
       <div>
+        <button>key binds</button>
+        <button>more settings</button>
         <h2>Volume</h2>
         <Slider min={0} max={100} value={volume} />
       </div>
 
       <div>
-        {/* <h2>Other Settings</h2> */}
         {/* Add other adjustable settings relevant for a screen reader here */}
       </div>
 

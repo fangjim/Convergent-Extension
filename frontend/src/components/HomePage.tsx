@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
 
     return (
         <div>
-            <h2>Screen Reader</h2>
+            <h2>Parrot</h2>
             <ControlPanel onRead={() => speak(description)} />
         </div>
     );
