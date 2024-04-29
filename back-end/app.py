@@ -22,7 +22,7 @@ def home():
             {
             "type": "image_url",
             "image_url": {
-                "url": url
+                "url": "https://m.media-amazon.com/images/I/91dVzoSUZrL._AC_SX679_.jpg"
             },
             },
         ],
