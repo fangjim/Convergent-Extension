@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "React Vite Chrome Extension",
+  "name": "Parrot Screen Reader",
   "version": "1.0.0",
   "description": "A Chrome screen reader extension built with React, TypeScript, and Vite.",
   "permissions": [
@@ -19,7 +19,7 @@
   ],
   "action": {
     "default_popup": "index.html",
-    "default_icon": "icons/ParrotIcon.png"
+    "default_icon": "icons/Frame13.png"
   },
   "web_accessible_resources": [
     {
